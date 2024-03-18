@@ -36,7 +36,7 @@ public class UserAdapter {
         user.setLastName(eventRequest.getLastName());
         user.setName(eventRequest.getName());
         user.setPassword(eventRequest.getPassword());
-        user.setRegisterDate(LocalDateTime.parse(eventRequest.getRegisterDate()));
+        user.setRegisterDate(LocalDateTime.parse(eventRequest.getRegisterDate(), DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")));
 
         return user;
     }

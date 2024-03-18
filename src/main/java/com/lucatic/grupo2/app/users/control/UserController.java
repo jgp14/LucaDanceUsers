@@ -61,7 +61,7 @@ public class UserController {
 			URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(user.getId())
 					.toUri();
 			LOGGER.info("User " + user.getName() + " with id " + user.getId() + " has been created");
-			return ResponseEntity.created(location).body(userAdapter.toEventResponseWithError(user));
+			return ResponseEntity.created(location).body(userAdapter.toUserResponseWithError(user));
 
 		} catch (UserExistException e) {
 			LOGGER.warn("Error pushing the event" + e.getMessage());
