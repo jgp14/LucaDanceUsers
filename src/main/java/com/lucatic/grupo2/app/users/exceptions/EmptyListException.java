@@ -19,6 +19,7 @@ public class EmptyListException extends UserException {
 	 * 
 	 * @param message descriptivo con el error de lista usuarios vacia.
 	 */
+
 	public EmptyListException(String message) {
 		super(message);
 	}
@@ -29,6 +30,7 @@ public class EmptyListException extends UserException {
 	 * @param message descriptivo con el error de lista usuarios vacia.
 	 * @param cause   Detalles de motivos de la causa throwable.
 	 */
+
 	public EmptyListException(String message, Throwable cause) {
 		super(message, cause);
 	}

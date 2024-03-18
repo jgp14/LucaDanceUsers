@@ -30,7 +30,9 @@ public class UserExistException extends UserException {
 	 * @param message el mensaje de error del usuario ya exitente
 	 * @param cause   Detalles de motivos de la causa throwable
 	 */
+
 	public UserExistException(String message, Throwable cause) {
 		super(message, cause);
 	}
+
 }
