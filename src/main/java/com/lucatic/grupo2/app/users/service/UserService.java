@@ -2,6 +2,7 @@ package com.lucatic.grupo2.app.users.service;
 
 import java.util.List;
 
+import com.lucatic.grupo2.app.users.exceptions.UserException;
 import com.lucatic.grupo2.app.users.exceptions.UserExistException;
 import com.lucatic.grupo2.app.users.models.User;
 import com.lucatic.grupo2.app.users.models.dto.UserRequest;
@@ -49,5 +50,5 @@ public interface UserService {
      * @return devuelve un objeto tipo User
      * @throws UserExistException Gestiona este tipo de excepcion
      */
-	User save(UserRequest event) throws UserExistException;
+	User save(UserRequest event) throws UserException;
 }

@@ -2,6 +2,7 @@ package com.lucatic.grupo2.app.users.service;
 
 import java.util.List;
 
+import com.lucatic.grupo2.app.users.exceptions.UserException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -91,7 +92,10 @@ public class UserServiceImpl implements UserService {
 	 */
 
 	@Override
-	public User save(UserRequest userRequest) throws UserExistException {
+	public User save(UserRequest userRequest) throws UserException {
+
+		if (userRequest == null)
+			throw new UserException("Intentando dar de alta un usuario nulo");
 
 		if (userRepository.findUserByEmail(userRequest.getEmail()) != null) {
 			throw new UserExistException("No se puede dar de alta porque ya existe el usuario");

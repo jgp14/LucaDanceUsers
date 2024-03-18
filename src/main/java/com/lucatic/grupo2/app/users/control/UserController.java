@@ -1,5 +1,6 @@
 package com.lucatic.grupo2.app.users.control;
 
+import com.lucatic.grupo2.app.users.exceptions.UserException;
 import com.lucatic.grupo2.app.users.models.User;
 import com.lucatic.grupo2.app.users.models.adapter.UserAdapter;
 import com.lucatic.grupo2.app.users.models.dto.UserRequest;
@@ -54,7 +55,7 @@ public class UserController {
 
 	})
 	@PostMapping
-	public ResponseEntity<?> save(@Valid @RequestBody UserRequest userRequest) throws UserExistException {
+	public ResponseEntity<?> save(@Valid @RequestBody UserRequest userRequest) throws UserException {
 
 		try {
 			User user = userService.save(userRequest);
@@ -66,9 +67,11 @@ public class UserController {
 		} catch (UserExistException e) {
 			LOGGER.warn("Error pushing the event" + e.getMessage());
 			throw e;
-		}
-
-	}
+		} catch (UserException e) {
+            LOGGER.warn("Error en dar de alta usuario " + e.getMessage());
+			throw e;
+        }
+    }
 
 	@Operation(summary = "Listar todos los usuarios", description = "Devuelve un listado de todos los usuarios existentes", tags = {
 			"event" })
