@@ -1,5 +1,9 @@
 package com.lucatic.grupo2.app.users.control;
 
+import com.lucatic.grupo2.app.users.models.User;
+import com.lucatic.grupo2.app.users.models.adapter.UserAdapter;
+import com.lucatic.grupo2.app.users.models.dto.UserRequest;
+import com.lucatic.grupo2.app.users.models.dto.UserResponseWithError;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -31,8 +35,10 @@ import org.apache.logging.log4j.Logger;
 @RequestMapping("/user")
 public class UserController  {
 	private final static Logger LOGGER = LogManager.getLogger(UserController.class);
+
 	@Autowired
 	private UserService userService;
+
 	@Autowired
 	private UserAdapter userAdapter;
 	
