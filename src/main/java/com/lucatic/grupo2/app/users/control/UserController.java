@@ -33,17 +33,42 @@ import jakarta.validation.Valid;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+/**
+ * Clase controladora, toma las decisiones de la aplicacion
+ *
+ * @author BlueDevTeam
+ * @version 1.0.0
+ * @since 18-03-2024
+ */
 @RestController
 @RequestMapping("/user")
 public class UserController {
+
+	/**
+	 * Logger que registra los errores de clase UserController
+	 */
 	private final static Logger LOGGER = LogManager.getLogger(UserController.class);
 
+	/**
+	 * Auto instanciamos el servicio de usuarios
+	 */
 	@Autowired
 	private UserService userService;
 
+	/**
+	 * Adaptador con transformacion de entidad User a UserResponse y UserRequest a
+	 * entidad User
+	 */
 	@Autowired
 	private UserAdapter userAdapter;
 
+	/**
+	 * Guarda un request body de un nuevo usuario en la base de datos usersdb
+	 * 
+	 * @param eventRequest Con los datos del User a guardar
+	 * @return ResponseEntity Con la respuesta de guardar el usuario
+	 * @throws UserExistException cuando no se guardo correctamente
+	 */
 	@Operation(summary = "Dar de alta un usuario", description = "Incluye un nuevo usuario en la base de datos", tags = {
 			"event" })
 	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Usuario creado correctamente", content = {
@@ -70,6 +95,12 @@ public class UserController {
 
 	}
 
+	/**
+	 * Lista todos los usuarios que estan guardados en la bbdd
+	 * 
+	 * @return ResponseEntity con el response de usuarios
+	 * @throws EmptyListException cuando no devuelve elementos de la lista usuarios
+	 */
 	@Operation(summary = "Listar todos los usuarios", description = "Devuelve un listado de todos los usuarios existentes", tags = {
 			"event" })
 	@ApiResponses(value = {
