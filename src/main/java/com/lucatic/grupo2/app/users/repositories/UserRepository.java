@@ -12,6 +12,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @since 18-03-2024
  */
 public interface UserRepository extends JpaRepository<User, Long> {
-
+	/**
+	 * Devuelve un objeto User a traves de un email concreto
+	 * 
+	 * @param email recibe un correo electronico
+	 * @return devuelve un objeto User
+	 */
 	User findUserByEmail(String email);
 }
