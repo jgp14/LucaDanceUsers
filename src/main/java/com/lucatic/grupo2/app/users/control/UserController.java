@@ -8,10 +8,13 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.lucatic.grupo2.app.users.adapter.UserAdapter;
+import com.lucatic.grupo2.app.users.exceptions.EmptyListException;
+import com.lucatic.grupo2.app.users.exceptions.UserExistException;
 import com.lucatic.grupo2.app.users.service.UserService;
-
+import io.swagger.v3.oas.annotations.media.ArraySchema;
 import java.net.URI;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.web.bind.annotation.GetMapping;
 
