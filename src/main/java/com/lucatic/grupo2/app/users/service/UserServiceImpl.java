@@ -93,7 +93,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User save(UserRequest userRequest) throws UserExistException {
 
-		if (userRepository.findUserByEmail(userRequest.getEmail()) == null) {
+		if (userRepository.findUserByEmail(userRequest.getEmail()) != null) {
 			throw new UserExistException("No se puede dar de alta porque ya existe el usuario");
 		}
 
