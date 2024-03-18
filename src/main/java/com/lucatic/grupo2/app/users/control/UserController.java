@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.lucatic.grupo2.app.users.adapter.UserAdapter;
 import com.lucatic.grupo2.app.users.service.UserService;
 
 import java.net.URI;
