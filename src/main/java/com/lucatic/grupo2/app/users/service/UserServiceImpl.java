@@ -68,7 +68,7 @@ public class UserServiceImpl implements UserService {
 	/**
 	 * Actualiza un usuario concreto
 	 * 
-	 * @param event recibe un objeto User preparado para actualizar
+	 * @param user recibe un objeto User preparado para actualizar
 	 * @return devuelve un USer actualizado
 	 */
 	@Override
