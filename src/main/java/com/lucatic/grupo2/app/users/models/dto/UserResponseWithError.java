@@ -17,6 +17,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserResponseWithError {
+
 	/**
 	 * Atributo con objeto Error
 	 */

@@ -3,6 +3,7 @@ package com.lucatic.grupo2.app.users.control;
 import com.lucatic.grupo2.app.users.exceptions.UserException;
 import com.lucatic.grupo2.app.users.models.User;
 import com.lucatic.grupo2.app.users.models.adapter.UserAdapter;
+import com.lucatic.grupo2.app.users.models.dto.UserExistResponseWithError;
 import com.lucatic.grupo2.app.users.models.dto.UserRequest;
 import com.lucatic.grupo2.app.users.models.dto.UserResponseWithError;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -129,6 +130,14 @@ public class UserController {
 		}
 	}
 
+	@Operation(summary = "Comprueba la existencia de un usuario por id", description = "Devuelve la existencia de un usuario", tags = {
+			"event" })
+	@ApiResponses(value = {
+			@ApiResponse(description = "Comprueba usuario", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = UserExistResponseWithError.class))),
+			@ApiResponse(responseCode = "404", description = "No hay usuarios", content = @Content),
+			@ApiResponse(responseCode = "500", description = "Error genérico listando usuarios", content = @Content)
+
+	})
 	@GetMapping("/exist/{id}")
 	public ResponseEntity<?> userFindById(@PathVariable long id) {
 		if (userService.userFindById(id)) {
