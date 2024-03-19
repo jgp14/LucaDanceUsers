@@ -1,6 +1,8 @@
 package com.lucatic.grupo2.app.users.models.adapter;
 
+import com.lucatic.grupo2.app.users.models.Error;
 import com.lucatic.grupo2.app.users.models.User;
+import com.lucatic.grupo2.app.users.models.dto.UserExistResponseWithError;
 import com.lucatic.grupo2.app.users.models.dto.UserRequest;
 import com.lucatic.grupo2.app.users.models.dto.UserResponse;
 import com.lucatic.grupo2.app.users.models.dto.UserResponseWithError;
@@ -57,5 +59,10 @@ public class UserAdapter {
 				LocalDateTime.parse(eventRequest.getRegisterDate(), DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")));
 
 		return user;
+	}
+
+	public UserExistResponseWithError toExitUserResponseWithError(boolean userExist) {
+
+		return new UserExistResponseWithError(null, userExist, false);
 	}
 }

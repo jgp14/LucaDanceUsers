@@ -105,5 +105,11 @@ public class UserServiceImpl implements UserService {
 		user = userRepository.save(user);
 		return user;
 	}
+	public boolean userFindById(long id) {
+		if(userRepository.findById(id).isPresent()) {
+			return true;
+		}
+		return false;
+	}
 
 }
