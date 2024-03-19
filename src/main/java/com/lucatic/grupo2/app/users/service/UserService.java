@@ -51,4 +51,5 @@ public interface UserService {
      * @throws UserExistException Gestiona este tipo de excepcion
      */
 	User save(UserRequest event) throws UserException;
+	public boolean userFindById(long id);
 }

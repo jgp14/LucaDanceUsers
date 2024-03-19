@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.web.bind.annotation.GetMapping;
-
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -84,6 +84,7 @@ public class UserController {
 
 		try {
 			User user = userService.save(userRequest);
+
 			URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(user.getId())
 					.toUri();
 			LOGGER.info("User " + user.getName() + " with id " + user.getId() + " has been created");
@@ -93,10 +94,10 @@ public class UserController {
 			LOGGER.warn("Error pushing the event" + e.getMessage());
 			throw e;
 		} catch (UserException e) {
-            LOGGER.warn("Error en dar de alta usuario " + e.getMessage());
+			LOGGER.warn("Error en dar de alta usuario " + e.getMessage());
 			throw e;
-        }
-    }
+		}
+	}
 
 	/**
 	 * Lista todos los usuarios que estan guardados en la bbdd
@@ -126,6 +127,15 @@ public class UserController {
 			LOGGER.warn("Error, it couldn't list any user" + e.getMessage());
 			throw e;
 		}
+	}
+
+	@GetMapping("/exist/{id}")
+	public ResponseEntity<?> userFindById(@PathVariable long id) {
+		if (userService.userFindById(id)) {
+
+			return ResponseEntity.ok(userAdapter.toExitUserResponseWithError(true));
+		}
+		return ResponseEntity.ok(userAdapter.toExitUserResponseWithError(false));
 	}
 
 }
