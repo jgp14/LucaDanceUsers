@@ -11,6 +11,7 @@ import com.lucatic.grupo2.app.users.repositories.UserRepository;
 import com.lucatic.grupo2.app.users.models.User;
 import com.lucatic.grupo2.app.users.models.dto.UserRequest;
 import com.lucatic.grupo2.app.users.exceptions.UserExistException;
+import com.lucatic.grupo2.app.users.exceptions.UserNameException;
 import com.lucatic.grupo2.app.users.models.adapter.UserAdapter;
 import com.lucatic.grupo2.app.users.exceptions.EmptyListException;
 
@@ -57,10 +58,11 @@ public class UserServiceImpl implements UserService {
 	 * 
 	 * @param id tiene el id de un objeto User
 	 * @return devuelve un objeto tipo User
+	 * @throws UserException 
 	 */
 	@Override
-	public User findById(Long id) {
-		return null;
+	public User findById(Long id) throws UserNameException {
+		return userRepository.findById(id).orElseThrow(()->new UserNameException("El usuario no existe"));
 	}
 
 	/**

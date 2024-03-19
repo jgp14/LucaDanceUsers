@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.lucatic.grupo2.app.users.exceptions.UserException;
 import com.lucatic.grupo2.app.users.exceptions.UserExistException;
+import com.lucatic.grupo2.app.users.exceptions.UserNameException;
 import com.lucatic.grupo2.app.users.models.User;
 import com.lucatic.grupo2.app.users.models.dto.UserRequest;
 import com.lucatic.grupo2.app.users.exceptions.EmptyListException;
@@ -29,7 +30,7 @@ public interface UserService {
      * @param id parametro con id de un User
      * @return devuelve un objeto tipo User
      */
-	User findById(Long id);
+	User findById(Long id) throws UserNameException;
 
     /**
      * Actualiza un usuario y lo devuelve
