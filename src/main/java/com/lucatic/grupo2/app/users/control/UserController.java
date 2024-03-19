@@ -15,6 +15,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.lucatic.grupo2.app.users.exceptions.EmptyListException;
 import com.lucatic.grupo2.app.users.exceptions.UserExistException;
+import com.lucatic.grupo2.app.users.exceptions.UserNameException;
 import com.lucatic.grupo2.app.users.service.UserService;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import java.net.URI;
@@ -145,6 +146,13 @@ public class UserController {
 			return ResponseEntity.ok(userAdapter.toExitUserResponseWithError(true));
 		}
 		return ResponseEntity.ok(userAdapter.toExitUserResponseWithError(false));
+	}
+
+	@GetMapping("/getname/{id}")
+	public ResponseEntity<?> userFindByText(@PathVariable long id) throws UserNameException {
+
+		return ResponseEntity.ok(userAdapter.toTextUserResponseWithError(userService.findById(id).getName()));
+
 	}
 
 }
