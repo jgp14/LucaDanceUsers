@@ -3,6 +3,9 @@ package com.lucatic.grupo2.app.users.service;
 import java.util.List;
 
 import com.lucatic.grupo2.app.users.exceptions.UserException;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,7 +16,6 @@ import com.lucatic.grupo2.app.users.models.dto.UserRequest;
 import com.lucatic.grupo2.app.users.exceptions.UserExistException;
 import com.lucatic.grupo2.app.users.exceptions.UserNameException;
 import com.lucatic.grupo2.app.users.models.adapter.UserAdapter;
-import com.lucatic.grupo2.app.model.Event;
 import com.lucatic.grupo2.app.users.exceptions.EmptyListException;
 
 /**
@@ -26,6 +28,11 @@ import com.lucatic.grupo2.app.users.exceptions.EmptyListException;
 @Service
 @Transactional
 public class UserServiceImpl implements UserService {
+
+	/**
+	 * Logger que registra los errores de clase UserServiceImpl
+	 */
+	private final static Logger LOGGER = LogManager.getLogger(UserServiceImpl.class);
 
 	/**
 	 * Auto instancia el objeto de repositorio para eventos
