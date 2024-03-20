@@ -58,11 +58,11 @@ public class UserServiceImpl implements UserService {
 	 * 
 	 * @param id tiene el id de un objeto User
 	 * @return devuelve un objeto tipo User
-	 * @throws UserException 
+	 * @throws UserException
 	 */
 	@Override
 	public User findById(Long id) throws UserNameException {
-		return userRepository.findById(id).orElseThrow(()->new UserNameException("El usuario no existe"));
+		return userRepository.findById(id).orElseThrow(() -> new UserNameException("El usuario no existe"));
 	}
 
 	/**
@@ -107,8 +107,15 @@ public class UserServiceImpl implements UserService {
 		user = userRepository.save(user);
 		return user;
 	}
+
+	/**
+	 * Método con cuerpo que maneja la existencia de un usuario
+	 * 
+	 * @param id recibe este parametro para la comprobación del usuario
+	 * @return devuelve un boolean si existe o no el usuario
+	 */
 	public boolean userFindById(long id) {
-		if(userRepository.findById(id).isPresent()) {
+		if (userRepository.findById(id).isPresent()) {
 			return true;
 		}
 		return false;

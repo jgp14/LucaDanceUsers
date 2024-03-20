@@ -1,6 +1,5 @@
 package com.lucatic.grupo2.app.users.models.adapter;
 
-import com.lucatic.grupo2.app.users.models.Error;
 import com.lucatic.grupo2.app.users.models.User;
 import com.lucatic.grupo2.app.users.models.dto.StringResponseWithError;
 import com.lucatic.grupo2.app.users.models.dto.UserExistResponseWithError;
@@ -62,13 +61,24 @@ public class UserAdapter {
 		return user;
 	}
 
+	/**
+	 * Método de conversión a través de un boolean
+	 * 
+	 * @param userExist recibe un boolean segun la existencia de un usuario
+	 * @return devuelve el objeto de tipo UserExistResponseWithError
+	 */
 	public UserExistResponseWithError toExitUserResponseWithError(boolean userExist) {
 
 		return new UserExistResponseWithError(null, userExist, false);
 	}
+	/**
+	 * Gestiona respuesta segun el nombre de texto que recibe como parámetro
+	 * @param userText recibe el nombre de un usuario
+	 * @return devuelve un objeto de tipo StringResponseWithError
+	 */
 	public StringResponseWithError toTextUserResponseWithError(String userText) {
 
 		return new StringResponseWithError(null, userText, false);
 	}
-	
+
 }
