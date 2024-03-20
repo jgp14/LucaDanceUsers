@@ -34,10 +34,10 @@ public interface UserService {
 
     /**
      * Actualiza un usuario y lo devuelve
-     * @param usuario recibe un evento de parametro a actualizar
+     * @param user recibe un evento de parametro a actualizar
      * @return comprueba que el usuario este actualizado
      */
-	User update(User event) throws UserException;
+	User update(User user) throws UserException;
 
     /**
      * Elimina un registro de la base de datos con un objeto que tiene el id de parametro
