@@ -68,7 +68,7 @@ public class UserController {
 	/**
 	 * Guarda un request body de un nuevo usuario en la base de datos usersdb
 	 * 
-	 * @param eventRequest Con los datos del User a guardar
+	 * @param userRequest Con los datos del User a guardar
 	 * @return ResponseEntity Con la respuesta de guardar el usuario
 	 * @throws UserExistException cuando no se guardo correctamente
 	 */

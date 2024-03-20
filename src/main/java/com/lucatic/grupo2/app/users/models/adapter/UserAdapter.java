@@ -1,6 +1,5 @@
 package com.lucatic.grupo2.app.users.models.adapter;
 
-import com.lucatic.grupo2.app.users.models.Error;
 import com.lucatic.grupo2.app.users.models.User;
 import com.lucatic.grupo2.app.users.models.dto.StringResponseWithError;
 import com.lucatic.grupo2.app.users.models.dto.UserExistResponseWithError;
