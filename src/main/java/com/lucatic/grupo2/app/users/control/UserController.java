@@ -6,6 +6,7 @@ import com.lucatic.grupo2.app.users.models.adapter.UserAdapter;
 import com.lucatic.grupo2.app.users.models.dto.StringResponseWithError;
 import com.lucatic.grupo2.app.users.models.dto.UserExistResponseWithError;
 import com.lucatic.grupo2.app.users.models.dto.UserRequest;
+import com.lucatic.grupo2.app.users.models.dto.UserResponse;
 import com.lucatic.grupo2.app.users.models.dto.UserResponseWithError;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -111,7 +112,7 @@ public class UserController {
 	@Operation(summary = "Listar todos los usuarios", description = "Devuelve un listado de todos los usuarios existentes", tags = {
 			"user" })
 	@ApiResponses(value = {
-			@ApiResponse(responseCode = "200", description = "Users listados", content = @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = UserResponseWithError.class)))),
+			@ApiResponse(responseCode = "200", description = "Users listados", content = @Content(mediaType = "application/json", schema = @Schema(implementation = UserResponseWithError.class))),
 			@ApiResponse(responseCode = "404", description = "No hay usuarios", content = @Content),
 			@ApiResponse(responseCode = "500", description = "Error genérico listando usuarios", content = @Content)
 
@@ -121,10 +122,13 @@ public class UserController {
 // return productAdapter.convertToDto(productService.getAll());
 		try {
 			List<User> users = userService.findAll();
-			List<UserResponseWithError> usersResponseWithError = users.stream()
-					.map(c -> userAdapter.toUserResponseWithError(c)).collect(Collectors.toList());
+			List<UserResponse> userResponses = users.stream().map(u -> userAdapter.toUserResponse(u)).collect(Collectors.toList());
+//			UserResponseWithError usersResponseWithError = users.stream()
+//					.map(c -> userAdapter.toUserResponseWithError(c)).collect(Collectors.toList());
+			UserResponseWithError userResponseWithError = new UserResponseWithError();
+			userResponseWithError.setUserResponse(userResponses);
 			LOGGER.info("Find all success");
-			return ResponseEntity.ok(usersResponseWithError);
+			return ResponseEntity.ok(userResponseWithError);
 
 		} catch (EmptyListException e) {
 			LOGGER.warn("Error, it couldn't list any user" + e.getMessage());

@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 /**
  * Clase modelo DTO UserResponseWithError para las respuestas. Posee los
  * getters, setters y constructores generados por Lombok @Data
@@ -25,7 +27,7 @@ public class UserResponseWithError {
 	/**
 	 * Atributo con objeto UserResponse
 	 */
-	private UserResponse userResponse;
+	private List<UserResponse> userResponse;
 	/**
 	 * Atributo con boolean para decidir si es o no un error
 	 */

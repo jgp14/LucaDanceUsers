@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 /**
  * Clase adaptadora UserAdapter. Encargada de transformacion de objetos de datos
@@ -38,7 +39,7 @@ public class UserAdapter {
 		userResponse.setRegisterDate(user.getRegisterDate().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")));
 		userResponse.setPassword(user.getPassword());
 
-		return new UserResponseWithError(null, userResponse, false);
+		return new UserResponseWithError(null, List.of(userResponse), false);
 	}
 
 	/**
@@ -81,4 +82,7 @@ public class UserAdapter {
 		return new StringResponseWithError(null, userText, false);
 	}
 
+	public UserResponse toUserResponse(User u) {
+		return new UserResponse(u.getId(), u.getName(), u.getLastName(), u.getEmail(), u.getPassword(), u.getRegisterDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")));
+	}
 }
