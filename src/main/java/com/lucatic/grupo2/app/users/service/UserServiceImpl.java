@@ -70,10 +70,20 @@ public class UserServiceImpl implements UserService {
 	 * 
 	 * @param user recibe un objeto User preparado para actualizar
 	 * @return devuelve un USer actualizado
+	 * @throws UserException
 	 */
 	@Override
-	public User update(User user) {
-		return null;
+	public User update(User user) throws UserException {
+		if (user == null)
+			throw new UserException("Intentando editar un usuario nulo");
+		User userExisting = findById(user.getId());
+		userExisting.setName(user.getName());
+		userExisting.setLastName(user.getLastName());
+		userExisting.setEmail(user.getEmail());
+		userExisting.setPassword(user.getPassword());
+		userExisting.setRegisterDate(user.getRegisterDate());
+
+		return userRepository.save(userExisting);
 	}
 
 	/**
@@ -83,7 +93,7 @@ public class UserServiceImpl implements UserService {
 	 */
 	@Override
 	public void deleteById(Long id) {
-
+		userRepository.deleteById(id);
 	}
 
 	/**
@@ -114,6 +124,7 @@ public class UserServiceImpl implements UserService {
 	 * @param id recibe este parametro para la comprobación del usuario
 	 * @return devuelve un boolean si existe o no el usuario
 	 */
+
 	public boolean userFindById(long id) {
 		if (userRepository.findById(id).isPresent()) {
 			return true;
