@@ -13,7 +13,6 @@ import com.lucatic.grupo2.app.users.models.dto.UserRequest;
 import com.lucatic.grupo2.app.users.exceptions.UserExistException;
 import com.lucatic.grupo2.app.users.exceptions.UserNameException;
 import com.lucatic.grupo2.app.users.models.adapter.UserAdapter;
-import com.lucatic.grupo2.app.model.Event;
 import com.lucatic.grupo2.app.users.exceptions.EmptyListException;
 
 /**
