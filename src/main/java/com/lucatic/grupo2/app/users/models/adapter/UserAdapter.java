@@ -70,4 +70,5 @@ public class UserAdapter {
 
 		return new StringResponseWithError(null, userText, false);
 	}
+	
 }
