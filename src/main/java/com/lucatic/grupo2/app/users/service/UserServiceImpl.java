@@ -126,6 +126,13 @@ public class UserServiceImpl implements UserService {
 		return user;
 	}
 
+	/**
+	 * Método con cuerpo que maneja la existencia de un usuario
+	 * 
+	 * @param id recibe este parametro para la comprobación del usuario
+	 * @return devuelve un boolean si existe o no el usuario
+	 */
+
 	public boolean userFindById(long id) {
 		if (userRepository.findById(id).isPresent()) {
 			return true;

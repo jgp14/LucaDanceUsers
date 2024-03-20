@@ -69,7 +69,7 @@ public class UserController {
 	/**
 	 * Guarda un request body de un nuevo usuario en la base de datos usersdb
 	 * 
-	 * @param eventRequest Con los datos del User a guardar
+	 * @param userRequest Con los datos del User a guardar
 	 * @return ResponseEntity Con la respuesta de guardar el usuario
 	 * @throws UserExistException cuando no se guardo correctamente
 	 */
@@ -132,6 +132,13 @@ public class UserController {
 		}
 	}
 
+	/**
+	 * Comprueba la existencia de un usuario por id
+	 * 
+	 * @param id necesario para la comprobar la existencia del usuario
+	 * @return devuelve un objeto de tipo ResponseEntity<?> con cuerpo de respuesta
+	 *         si esta o no todo bien
+	 */
 	@Operation(summary = "Comprueba la existencia de un usuario por id", description = "Devuelve la existencia de un usuario", tags = {
 			"user" })
 	@ApiResponses(value = {
@@ -157,6 +164,14 @@ public class UserController {
 			@ApiResponse(responseCode = "500", description = "Error genérico listando usuarios", content = @Content)
 
 	})
+	/**
+	 * Gestiona el nombre de un usuario a traves de un id para comprobar su
+	 * existencia
+	 * 
+	 * @param id necesario para la comprobación de la existencia de el usuario
+	 * @return devuelve un objeto tipo StringResponseWithError
+	 * @throws UserNameException gestionado segun si puede o no obtener el nombre
+	 */
 	@GetMapping("/getname/{id}")
 	public ResponseEntity<?> userFindByText(@PathVariable long id) throws UserNameException {
 
