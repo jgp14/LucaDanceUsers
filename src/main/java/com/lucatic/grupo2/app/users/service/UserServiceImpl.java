@@ -13,6 +13,7 @@ import com.lucatic.grupo2.app.users.models.dto.UserRequest;
 import com.lucatic.grupo2.app.users.exceptions.UserExistException;
 import com.lucatic.grupo2.app.users.exceptions.UserNameException;
 import com.lucatic.grupo2.app.users.models.adapter.UserAdapter;
+import com.lucatic.grupo2.app.model.Event;
 import com.lucatic.grupo2.app.users.exceptions.EmptyListException;
 
 /**
@@ -58,11 +59,11 @@ public class UserServiceImpl implements UserService {
 	 * 
 	 * @param id tiene el id de un objeto User
 	 * @return devuelve un objeto tipo User
-	 * @throws UserException 
+	 * @throws UserException
 	 */
 	@Override
 	public User findById(Long id) throws UserNameException {
-		return userRepository.findById(id).orElseThrow(()->new UserNameException("El usuario no existe"));
+		return userRepository.findById(id).orElseThrow(() -> new UserNameException("El usuario no existe"));
 	}
 
 	/**
@@ -70,10 +71,20 @@ public class UserServiceImpl implements UserService {
 	 * 
 	 * @param user recibe un objeto User preparado para actualizar
 	 * @return devuelve un USer actualizado
+	 * @throws UserException
 	 */
 	@Override
-	public User update(User user) {
-		return null;
+	public User update(User user) throws UserException {
+		if (user == null)
+			throw new UserException("Intentando editar un usuario nulo");
+		User userExisting = findById(user.getId());
+		userExisting.setName(user.getName());
+		userExisting.setLastName(user.getLastName());
+		userExisting.setEmail(user.getEmail());
+		userExisting.setPassword(user.getPassword());
+		userExisting.setRegisterDate(user.getRegisterDate());
+
+		return userRepository.save(userExisting);
 	}
 
 	/**
@@ -83,7 +94,7 @@ public class UserServiceImpl implements UserService {
 	 */
 	@Override
 	public void deleteById(Long id) {
-
+		userRepository.deleteById(id);
 	}
 
 	/**
@@ -107,8 +118,9 @@ public class UserServiceImpl implements UserService {
 		user = userRepository.save(user);
 		return user;
 	}
+
 	public boolean userFindById(long id) {
-		if(userRepository.findById(id).isPresent()) {
+		if (userRepository.findById(id).isPresent()) {
 			return true;
 		}
 		return false;

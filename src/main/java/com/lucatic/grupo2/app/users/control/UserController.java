@@ -3,6 +3,7 @@ package com.lucatic.grupo2.app.users.control;
 import com.lucatic.grupo2.app.users.exceptions.UserException;
 import com.lucatic.grupo2.app.users.models.User;
 import com.lucatic.grupo2.app.users.models.adapter.UserAdapter;
+import com.lucatic.grupo2.app.users.models.dto.StringResponseWithError;
 import com.lucatic.grupo2.app.users.models.dto.UserExistResponseWithError;
 import com.lucatic.grupo2.app.users.models.dto.UserRequest;
 import com.lucatic.grupo2.app.users.models.dto.UserResponseWithError;
@@ -73,7 +74,7 @@ public class UserController {
 	 * @throws UserExistException cuando no se guardo correctamente
 	 */
 	@Operation(summary = "Dar de alta un usuario", description = "Incluye un nuevo usuario en la base de datos", tags = {
-			"event" })
+			"user" })
 	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Usuario creado correctamente", content = {
 			@Content(mediaType = "application/json", schema = @Schema(implementation = UserResponseWithError.class)) }),
 
@@ -108,7 +109,7 @@ public class UserController {
 	 * @throws EmptyListException cuando no devuelve elementos de la lista usuarios
 	 */
 	@Operation(summary = "Listar todos los usuarios", description = "Devuelve un listado de todos los usuarios existentes", tags = {
-			"event" })
+			"user" })
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "Users listados", content = @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = UserResponseWithError.class)))),
 			@ApiResponse(responseCode = "404", description = "No hay usuarios", content = @Content),
@@ -132,10 +133,10 @@ public class UserController {
 	}
 
 	@Operation(summary = "Comprueba la existencia de un usuario por id", description = "Devuelve la existencia de un usuario", tags = {
-			"event" })
+			"user" })
 	@ApiResponses(value = {
 			@ApiResponse(description = "Comprueba usuario", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = UserExistResponseWithError.class))),
-			@ApiResponse(responseCode = "404", description = "No hay usuarios", content = @Content),
+			@ApiResponse(responseCode = "404", description = "No hay usuarios con ese id", content = @Content),
 			@ApiResponse(responseCode = "500", description = "Error genérico listando usuarios", content = @Content)
 
 	})
@@ -148,6 +149,14 @@ public class UserController {
 		return ResponseEntity.ok(userAdapter.toExitUserResponseWithError(false));
 	}
 
+	@Operation(summary = "Comprueba la existencia de un usuario obteniendo el nombre", description = "Devuelve el nombre de un usuario", tags = {
+			"user" })
+	@ApiResponses(value = {
+			@ApiResponse(description = "Comprueba usuario existente y devuelve el nombre", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = StringResponseWithError.class))),
+			@ApiResponse(responseCode = "404", description = "No hay usuarios", content = @Content),
+			@ApiResponse(responseCode = "500", description = "Error genérico listando usuarios", content = @Content)
+
+	})
 	@GetMapping("/getname/{id}")
 	public ResponseEntity<?> userFindByText(@PathVariable long id) throws UserNameException {
 
