@@ -47,7 +47,7 @@ public interface UserService {
 	 * 
 	 * @param id parametro de un registro a borrar
 	 */
-	void deleteById(Long id);
+	User deleteById(Long id) throws UserException;
 
 	/**
 	 * Guarda un objeto de tipo UserRequest
