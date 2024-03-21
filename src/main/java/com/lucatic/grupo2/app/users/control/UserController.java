@@ -24,6 +24,7 @@ import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -182,5 +183,31 @@ public class UserController {
 		return ResponseEntity.ok(userAdapter.toTextUserResponseWithError(userService.findById(id).getName()));
 
 	}
+	@Operation(summary = "Comprueba la eliminacion de un usuario por id", description = "Elimina un usuario", tags = {
+	"user" })
+@ApiResponses(value = {
+	@ApiResponse(description = "Elimina usuario", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = UserResponseWithError.class))),
+	@ApiResponse(responseCode = "404", description = "No hay usuarios con ese id", content = @Content),
+	@ApiResponse(responseCode = "500", description = "Error genérico eliminando usuarios", content = @Content)
+
+})
+	@DeleteMapping
+	public ResponseEntity<?> delete(@Valid long id) throws UserException {
+
+		try {
+			User user = userService.deleteById(id);
+
+			URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(user.getId())
+					.toUri();
+			LOGGER.info("User " + user.getName() + " with id " + user.getId() + " has been deleted");
+			return ResponseEntity.created(location).body(userAdapter.toUserResponseWithError(user));
+
+		}  catch (UserException e) {
+			LOGGER.warn("Error en dar de alta usuario " + e.getMessage());
+			throw e;
+		}
+	}
+	
+	
 
 }
