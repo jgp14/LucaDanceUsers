@@ -209,18 +209,18 @@ public class UserController {
 		}
 	}
 	@PutMapping
-	public ResponseEntity<?> update(@Valid long id) throws UserException {
+	public ResponseEntity<?> update(@Valid User user) throws UserException {
 
 		try {
-			User user = userService.deleteById(id);
+			User userUpdate = userService.update(userAdapter.toUserRequest(user),user.getId());
 
-			URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(user.getId())
+			URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(userUpdate.getId())
 					.toUri();
-			LOGGER.info("User " + user.getName() + " with id " + user.getId() + " has been deleted");
-			return ResponseEntity.created(location).body(userAdapter.toUserResponseWithError(user));
+			LOGGER.info("User " + userUpdate.getName() + " with id " + userUpdate.getId() + " has been updated");
+			return ResponseEntity.created(location).body(userAdapter.toUserResponseWithError(userUpdate));
 
 		}  catch (UserException e) {
-			LOGGER.warn("Error en dar de alta usuario " + e.getMessage());
+			LOGGER.warn("Error al actualizar el usuario " + e.getMessage());
 			throw e;
 		}
 	}

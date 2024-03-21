@@ -72,8 +72,10 @@ public class UserAdapter {
 
 		return new UserExistResponseWithError(null, userExist, false);
 	}
+
 	/**
 	 * Gestiona respuesta segun el nombre de texto que recibe como parámetro
+	 * 
 	 * @param userText recibe el nombre de un usuario
 	 * @return devuelve un objeto de tipo StringResponseWithError
 	 */
@@ -83,6 +85,18 @@ public class UserAdapter {
 	}
 
 	public UserResponse toUserResponse(User u) {
-		return new UserResponse(u.getId(), u.getName(), u.getLastName(), u.getEmail(), u.getPassword(), u.getRegisterDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")));
+		return new UserResponse(u.getId(), u.getName(), u.getLastName(), u.getEmail(), u.getPassword(),
+				u.getRegisterDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")));
+	}
+
+	public UserRequest toUserRequest(User user) {
+		UserRequest userRequest = new UserRequest();
+		userRequest.setName(user.getName());
+		userRequest.setLastName(user.getLastName());
+		userRequest.setEmail(user.getEmail());
+		userRequest.setPassword(user.getPassword());
+		userRequest.setRegisterDate(user.getRegisterDate().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")));
+		return userRequest;
+
 	}
 }
