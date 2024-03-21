@@ -1,5 +1,7 @@
 package com.lucatic.grupo2.app.users.service;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import com.lucatic.grupo2.app.users.exceptions.UserException;
@@ -81,17 +83,22 @@ public class UserServiceImpl implements UserService {
 	 * @throws UserException
 	 */
 	@Override
-	public User update(User user) throws UserException {
-		if (user == null)
-			throw new UserException("Intentando editar un usuario nulo");
-		User userExisting = findById(user.getId());
-		userExisting.setName(user.getName());
-		userExisting.setLastName(user.getLastName());
-		userExisting.setEmail(user.getEmail());
-		userExisting.setPassword(user.getPassword());
-		userExisting.setRegisterDate(user.getRegisterDate());
+	public User update(UserRequest userRequest, Long id) throws UserException {
+		if (userRequest == null)
+			throw new UserException("User request is nul");
+		User userExisting = findById(id);
 
-		return userRepository.save(userExisting);
+		userExisting.setName(userRequest.getName());
+		userExisting.setLastName(userRequest.getLastName());
+		userExisting.setEmail(userRequest.getEmail());
+		userExisting.setPassword(userRequest.getPassword());
+		userExisting.setRegisterDate(
+				LocalDateTime.parse(userRequest.getRegisterDate(), DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")));
+
+		User user = userAdapter.fromUserRequest(userRequest);
+		user.setId(id);
+		user = userRepository.saveAndFlush(user);
+		return user;
 	}
 
 	/**

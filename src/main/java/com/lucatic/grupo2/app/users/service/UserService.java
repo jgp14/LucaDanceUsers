@@ -39,7 +39,7 @@ public interface UserService {
      * @param user recibe un evento de parametro a actualizar
      * @return comprueba que el usuario este actualizado
      */
-	User update(User user) throws UserException;
+	User update(UserRequest user, Long id) throws UserException;
 
 	/**
 	 * Elimina un registro de la base de datos con un objeto que tiene el id de
