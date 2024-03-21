@@ -11,6 +11,7 @@ import com.lucatic.grupo2.app.users.models.dto.UserResponseWithError;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -191,7 +192,7 @@ public class UserController {
 	@ApiResponse(responseCode = "500", description = "Error genérico eliminando usuarios", content = @Content)
 
 })
-	@DeleteMapping
+	@DeleteMapping("/{id}")
 	public ResponseEntity<?> delete(@Valid long id) throws UserException {
 
 		try {
@@ -207,6 +208,7 @@ public class UserController {
 			throw e;
 		}
 	}
+	@PutMapping
 	
 	
 
