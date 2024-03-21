@@ -78,7 +78,7 @@ public class UserServiceImpl implements UserService {
 	/**
 	 * Actualiza un usuario concreto
 	 * 
-	 * @param user recibe un objeto User preparado para actualizar
+	 * @param userRequest recibe un objeto User preparado para actualizar
 	 * @return devuelve un USer actualizado
 	 * @throws UserException
 	 */
@@ -142,6 +142,8 @@ public class UserServiceImpl implements UserService {
 	 * @return devuelve un boolean si existe o no el usuario
 	 */
 
+
+	@Override
 	public boolean userFindById(Long id) {
 		if (userRepository.findById(id).isPresent()) {
 			return true;

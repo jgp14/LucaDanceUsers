@@ -205,11 +205,13 @@ public class UserController {
 			throw e;
 		}
 	}
-	@PutMapping
-	public ResponseEntity<?> update(@Valid @RequestBody User user) throws UserException {
+
+
+	@PutMapping("/{id}")
+	public ResponseEntity<?> update(@Valid @RequestBody UserRequest userRequest, @PathVariable Long id) throws UserException {
 
 		try {
-			User userUpdate = userService.update(userAdapter.toUserRequest(user),user.getId());
+			User userUpdate = userService.update(userRequest,id);
 
 			URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(userUpdate.getId())
 					.toUri();
