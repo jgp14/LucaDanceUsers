@@ -100,8 +100,10 @@ public class UserServiceImpl implements UserService {
 	 * @param id recibe un id de un objeto a borrar
 	 */
 	@Override
-	public void deleteById(Long id) {
+	public User deleteById(Long id) throws UserException {
+		User user = userRepository.findById(id).orElseThrow(() -> new UserException("Usuario no éxiste para borrar"));
 		userRepository.deleteById(id);
+		return  user;
 	}
 
 	/**
