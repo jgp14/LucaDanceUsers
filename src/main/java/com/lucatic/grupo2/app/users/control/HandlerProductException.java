@@ -35,7 +35,7 @@ public class HandlerProductException {
 		Error error = new Error();
 		error.setDate(LocalDateTime.now());
 		error.setError("Error procesando petición");
-		error.setMessage("Error del tipo " + e.getClass().getSimpleName());
+		error.setMessage("Error del tipo genérico");
 		error.setStatus(HttpStatus.BAD_REQUEST.value());
 		// return ResponseEntity.internalServerError().body(error);
 		UserResponseWithError eventResponseWithError = new UserResponseWithError();
@@ -55,7 +55,7 @@ public class HandlerProductException {
 		Error error = new Error();
 		error.setDate(LocalDateTime.now());
 		error.setError("Error genérico procesando petición");
-		error.setMessage("Error del tipo " + e.getClass().getSimpleName());
+		error.setMessage("Error del tipo genérico");
 		error.setStatus(HttpStatus.BAD_REQUEST.value());
 		// return ResponseEntity.internalServerError().body(error);
 		UserResponseWithError eventResponseWithError = new UserResponseWithError();
@@ -69,7 +69,7 @@ public class HandlerProductException {
 		Error error = new Error();
 		error.setDate(LocalDateTime.now());
 		error.setError("Error en los datos del cliente, compruebelos");
-		error.setMessage("Error del tipo " + e.getClass().getSimpleName() + " " + e.getMessage().split(":")[1]);
+		error.setMessage(e.getMessage().split(":")[1]);
 		error.setStatus(HttpStatus.BAD_REQUEST.value());
 		// return ResponseEntity.internalServerError().body(error);
 		UserResponseWithError eventResponseWithError = new UserResponseWithError();
@@ -89,7 +89,7 @@ public class HandlerProductException {
 		Error error = new Error();
 		error.setDate(LocalDateTime.now());
 		error.setError("Error ya existe el usuario");
-		error.setMessage("Error del tipo " + e.getClass().getSimpleName() + " " + e.getMessage());
+		error.setMessage(e.getMessage());
 		error.setStatus(HttpStatus.BAD_REQUEST.value());
 		UserResponseWithError eventResponseWithError = new UserResponseWithError();
 		eventResponseWithError.setError(error);
@@ -109,7 +109,7 @@ public class HandlerProductException {
 		Error error = new Error();
 		error.setDate(LocalDateTime.now());
 		error.setError("Error la lista está vacía");
-		error.setMessage("Error del tipo " + e.getClass().getSimpleName() + " " + e.getMessage());
+		error.setMessage( e.getMessage());
 		error.setStatus(HttpStatus.BAD_REQUEST.value());
 		UserResponseWithError eventResponseWithError = new UserResponseWithError();
 		eventResponseWithError.setError(error);
@@ -129,7 +129,7 @@ public class HandlerProductException {
 		Error error = new Error();
 		error.setDate(LocalDateTime.now());
 		error.setError("Error en la URL");
-		error.setMessage("Error del tipo " + e.getClass().getSimpleName());
+		error.setMessage("Error buscando método para procesar solicitud");
 		error.setStatus(HttpStatus.BAD_REQUEST.value());
 		UserResponseWithError eventResponseWithError = new UserResponseWithError();
 		eventResponseWithError.setError(error);
@@ -149,7 +149,7 @@ public class HandlerProductException {
 		Error error = new Error();
 		error.setDate(LocalDateTime.now());
 		error.setError("Error en la URL");
-		error.setMessage("Error del tipo " + e.getClass().getSimpleName());
+		error.setMessage("Error proceando la solicitud");
 		error.setStatus(HttpStatus.METHOD_NOT_ALLOWED.value());
 		UserResponseWithError eventResponseWithError = new UserResponseWithError();
 		eventResponseWithError.setError(error);
