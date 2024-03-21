@@ -193,7 +193,7 @@ public class UserController {
 
 })
 	@DeleteMapping("/{id}")
-	public ResponseEntity<?> delete(@Valid long id) throws UserException {
+	public ResponseEntity<?> delete(@PathVariable long id) throws UserException {
 
 		try {
 			User user = userService.deleteById(id);
@@ -209,7 +209,21 @@ public class UserController {
 		}
 	}
 	@PutMapping
-	
+	public ResponseEntity<?> update(@Valid long id) throws UserException {
+
+		try {
+			User user = userService.deleteById(id);
+
+			URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(user.getId())
+					.toUri();
+			LOGGER.info("User " + user.getName() + " with id " + user.getId() + " has been deleted");
+			return ResponseEntity.created(location).body(userAdapter.toUserResponseWithError(user));
+
+		}  catch (UserException e) {
+			LOGGER.warn("Error en dar de alta usuario " + e.getMessage());
+			throw e;
+		}
+	}
 	
 
 }
