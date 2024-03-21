@@ -85,8 +85,8 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User update(UserRequest userRequest, Long id) throws UserException {
 		if (userRequest == null)
-			throw new UserException("User request is nul");
-		User userExisting = findById(id);
+			throw new UserException("User request is null");
+		User userExisting = userRepository.findById(id).orElseThrow(() -> new UserException("El usuario no existe"));
 
 		userExisting.setName(userRequest.getName());
 		userExisting.setLastName(userRequest.getLastName());
@@ -110,7 +110,7 @@ public class UserServiceImpl implements UserService {
 	public User deleteById(Long id) throws UserException {
 		User user = userRepository.findById(id).orElseThrow(() -> new UserException("Usuario no éxiste para borrar"));
 		userRepository.deleteById(id);
-		return  user;
+		return user;
 	}
 
 	/**
@@ -142,7 +142,7 @@ public class UserServiceImpl implements UserService {
 	 * @return devuelve un boolean si existe o no el usuario
 	 */
 
-	public boolean userFindById(long id) {
+	public boolean userFindById(Long id) {
 		if (userRepository.findById(id).isPresent()) {
 			return true;
 		}
