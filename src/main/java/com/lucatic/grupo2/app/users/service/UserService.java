@@ -64,5 +64,5 @@ public interface UserService {
 	 * @param id parámetro de un id para comprobar la existencia de un usuario
 	 * @return devuelve un boolean segun la existencia de un usuario
 	 */
-	public boolean userFindById(long id);
+	boolean userFindById(Long id);
 }
