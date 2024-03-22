@@ -93,7 +93,7 @@ public class UserServiceImpl implements UserService {
 		userExisting.setEmail(userRequest.getEmail());
 		userExisting.setPassword(userRequest.getPassword());
 		userExisting.setRegisterDate(
-				LocalDateTime.parse(userRequest.getRegisterDate(), DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")));
+				LocalDateTime.parse(userRequest.getRegisterDate(), DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")));
 
 		User user = userAdapter.fromUserRequest(userRequest);
 		user.setId(id);

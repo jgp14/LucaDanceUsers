@@ -36,7 +36,7 @@ public class UserAdapter {
 		userResponse.setEmail(user.getEmail());
 		userResponse.setLastName(user.getLastName());
 		userResponse.setName(user.getName());
-		userResponse.setRegisterDate(user.getRegisterDate().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")));
+		userResponse.setRegisterDate(user.getRegisterDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")));
 		userResponse.setPassword(user.getPassword());
 
 		return new UserResponseWithError(null, List.of(userResponse), false);
@@ -57,7 +57,7 @@ public class UserAdapter {
 		user.setName(eventRequest.getName());
 		user.setPassword(eventRequest.getPassword());
 		user.setRegisterDate(
-				LocalDateTime.parse(eventRequest.getRegisterDate(), DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")));
+				LocalDateTime.parse(eventRequest.getRegisterDate(), DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")));
 
 		return user;
 	}
